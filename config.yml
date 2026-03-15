@@ -1,0 +1,29 @@
+language: en
+
+pipeline:
+- name: WhitespaceTokenizer
+- name: RegexFeaturizer
+
+- name: CountVectorsFeaturizer
+- name: CountVectorsFeaturizer
+  analyzer: char_wb
+  min_ngram: 1
+  max_ngram: 4
+
+- name: DIETClassifier
+  epochs: 200
+  constrain_similarities: true
+
+- name: EntitySynonymMapper
+
+- name: FallbackClassifier
+  threshold: 0.25
+  ambiguity_threshold: 0.1
+
+policies:
+- name: RulePolicy
+  core_fallback_threshold: 0.2
+  core_fallback_action_name: "action_default_fallback"
+  enable_fallback_prediction: true
+
+assistant_id: 20251214-222547-tractable-castle
