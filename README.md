@@ -1,5 +1,5 @@
 # nl2gcode-cnc-thesis
-# Natural Language to G-code Translation for CNC grinding using NLU and LLM approaches
+Natural Language to G-code Translation for CNC grinding using NLU and LLM approaches
 
 This repository contains the dataset, code, and experiments for the Master's thesis:
 
