@@ -1,0 +1,47 @@
+version: "3.1"
+
+intents:
+  - grind_linear
+  - pure_positioning
+  - homing
+  - inform_f_value
+
+slots:
+  x_value:
+    type: float
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  z_value:
+    type: float
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  f_value:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  F_label:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  awaiting_f:
+    type: bool
+    influence_conversation: true
+    initial_value: false
+    mappings:
+      - type: custom
+
+actions:
+  - action_handle_command
+
+responses:
+  utter_default:
+    - text: "Sorry, I didn't understand. Can you rephrase?"
+

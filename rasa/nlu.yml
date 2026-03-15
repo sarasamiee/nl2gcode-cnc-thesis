@@ -1,0 +1,111 @@
+version: "3.1"
+
+nlu:
+
+# =====================================================
+# INTENT 1: GRIND LINEAR (G01) — FEED RATE IS RELEVANT
+# =====================================================
+- intent: grind_linear
+  examples: |
+    - Remove material up to point {"entity": "x_value"}X20 {"entity": "z_value"}Z-5 with a {"entity": "F_label", "value": "F_medium"}light cut
+    - Make a {"entity": "F_label", "value": "F_medium"}superficial cut at {"entity": "z_value"}Z-2
+    - Cut deeply up to {"entity": "x_value"}X-25 {"entity": "z_value"}Z-10 with a {"entity": "F_label", "value": "F_fast"}rough cut
+    - Perform a {"entity": "F_label", "value": "F_precise"}finishing cut at {"entity": "x_value"}X20 {"entity": "z_value"}Z-5
+    - Grind to {"entity": "x_value"}X10 {"entity": "z_value"}Z-3 {"entity": "F_label", "value": "F_slow"}carefully
+    - Move {"entity": "F_label", "value": "F_slow"}slowly to {"entity": "x_value"}X15 {"entity": "z_value"}Z-3
+    - Slide the grinding wheel to {"entity": "x_value"}X10 {"entity": "z_value"}Z-8 for a {"entity": "F_label", "value": "F_fast"}rough cut
+    - Lower the grinding wheel to {"entity": "z_value"}Z-8 for a {"entity": "F_label", "value": "F_fast"}heavy cut
+    - Move the wheel to {"entity": "x_value"}X11 {"entity": "z_value"}Z-4 at {"entity": "f_value"}F8
+    - Move the wheel to {"entity": "x_value"}X-6 {"entity": "z_value"}Z-7 at {"entity": "f_value"}F6
+
+# =====================================================
+# INTENT 2: PURE POSITIONING (G00) — NO FEED RATE
+# =====================================================
+- intent: pure_positioning
+  examples: |
+    - Move to {"entity": "x_value"}X10 {"entity": "z_value"}Z0
+    - Position the wheel at {"entity": "x_value"}X21
+    - Place the grinding wheel at {"entity": "z_value"}Z5
+    - Return quickly to {"entity": "z_value"}Z0
+    - Move slowly to {"entity": "x_value"}X-30
+    - Shift the wheel to {"entity": "x_value"}X0 {"entity": "z_value"}Z-8 for inspection
+    - Move to {"entity": "x_value"}X-40 {"entity": "z_value"}Z0
+    - Go to {"entity": "z_value"}Z10 for a check
+
+# =====================================================
+# INTENT 3: HOMING (G28)
+# =====================================================
+- intent: homing
+  examples: |
+    - Return to home position
+    - Go to home
+    - Bring the machine to its home point
+    - Reset the machine
+    - Return to the programmed home position
+
+# =====================================================
+# INTENT: USER PROVIDES EXACT FEED VALUE (SECOND TURN)
+# =====================================================
+- intent: inform_f_value
+  examples: |
+    - {"entity": "f_value"}5
+    - {"entity": "f_value"}6
+    - {"entity": "f_value"}8
+    - {"entity": "f_value"}10
+    - {"entity": "f_value"}12
+    - {"entity": "f_value"}15
+    - {"entity": "f_value"}16
+    - {"entity": "f_value"}18
+    - {"entity": "f_value"}20
+    - {"entity": "f_value"}25
+    - {"entity": "f_value"}30
+    - set it to {"entity": "f_value"}20
+    - use F{"entity": "f_value"}20
+
+# =====================================================
+# REGEX ENTITIES
+# =====================================================
+- regex: x_value
+  examples: |
+    - X-?\d+
+
+- regex: z_value
+  examples: |
+    - Z-?\d+
+
+- regex: f_value
+  examples: |
+    - F?\b(5|6|8|9|10|11|12|15|16|17|18|19|20|25|26|27|28|29|30)\b
+
+# =====================================================
+# ENTITY SYNONYMS (FEED LABELS)
+# =====================================================
+- synonym: F_medium
+  examples: |
+    - light
+    - light cut
+    - superficial
+
+- synonym: F_slow
+  examples: |
+    - slow
+    - slowly
+    - careful
+    - carefully
+    - fine
+    - fine cut
+
+- synonym: F_precise
+  examples: |
+    - finishing
+    - precision
+    - spark-out
+    - final pass
+
+- synonym: F_fast
+  examples: |
+    - rough
+    - rough cut
+    - deep
+    - heavy
+

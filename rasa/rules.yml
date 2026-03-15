@@ -1,0 +1,24 @@
+version: "3.1"
+
+rules:
+
+- rule: Handle grind linear
+  steps:
+    - intent: grind_linear
+    - action: action_handle_command
+
+- rule: Handle pure positioning
+  steps:
+    - intent: pure_positioning
+    - action: action_handle_command
+
+- rule: Handle homing
+  steps:
+    - intent: homing
+    - action: action_handle_command
+
+- rule: Handle exact F value reply
+  steps:
+    - intent: inform_f_value
+    - action: action_handle_command
+
